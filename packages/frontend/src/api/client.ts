@@ -9,7 +9,7 @@ import type {
   ThresholdConfig,
 } from "@eol-tracker/shared";
 
-const apiBase = import.meta.env.VITE_API_BASE || "https://eol-tracker.onrender.com";
+const apiBase = "https://eol-tracker.onrender.com";
 
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
   const res = await fetch(`${apiBase}/api${path}`, {
