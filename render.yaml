@@ -9,7 +9,7 @@ services:
     branch: main
     plan: starter
     root: .
-    buildCommand: npm ci && npm run build
+    buildCommand: npm ci --omit=none && npm run build
     startCommand: node packages/backend/dist/server.js
     envVars:
       - key: DATABASE_URL
@@ -19,5 +19,5 @@ services:
     name: eol-tracker-frontend
     branch: main
     root: .
-    buildCommand: npm ci && npm run build --workspace packages/frontend
+    buildCommand: npm ci --omit=none && npm run build --workspace packages/frontend
     publishPath: packages/frontend/dist
