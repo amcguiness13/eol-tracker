@@ -21,3 +21,7 @@ services:
     root: .
     buildCommand: npm ci --omit=none && npm run build --workspace packages/frontend
     publishPath: packages/frontend/dist
+    envVars:
+      - key: VITE_API_BASE
+        value: https://eol-tracker.onrender.com
+        sync: false

@@ -9,8 +9,10 @@ import type {
   ThresholdConfig,
 } from "@eol-tracker/shared";
 
+const apiBase = import.meta.env.VITE_API_BASE || "";
+
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
-  const res = await fetch(`/api${path}`, {
+  const res = await fetch(`${apiBase}/api${path}`, {
     headers: { "Content-Type": "application/json" },
     ...init,
   });
