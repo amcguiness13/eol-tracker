@@ -1,0 +1,23 @@
+# Render service definitions for eol-tracker monorepo
+# - Backend: Web Service (builds the whole repo then runs backend entrypoint)
+# - Frontend: Static Site (builds frontend workspace and publishes dist)
+
+services:
+  - type: web_service
+    name: eol-tracker-backend
+    env: node
+    branch: main
+    plan: starter
+    root: .
+    buildCommand: npm ci && npm run build
+    startCommand: node packages/backend/dist/server.js
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+
+  - type: static_site
+    name: eol-tracker-frontend
+    branch: main
+    root: .
+    buildCommand: npm ci && npm run build --workspace packages/frontend
+    publishPath: packages/frontend/dist
