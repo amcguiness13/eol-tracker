@@ -1,0 +1,60 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// --- App data: persisted indefinitely -------------------------------------
+
+model StackItem {
+  id          String   @id @default(cuid())
+  product     String
+  cycle       String
+  environment String   @default("unspecified")
+  owner       String?
+  notes       String?
+  source      String   @default("manual") // manual | github | azure | gcp
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  thresholds    Threshold[]
+  notifications Notification[]
+
+  @@unique([product, cycle, environment])
+}
+
+model Threshold {
+  id          String     @id @default(cuid())
+  // null = global default threshold, applies to every StackItem without its own override
+  stackItemId String?
+  stackItem   StackItem? @relation(fields: [stackItemId], references: [id], onDelete: Cascade)
+  days        Int
+
+  @@unique([stackItemId, days])
+}
+
+model Notification {
+  id            String   @id @default(cuid())
+  stackItemId   String
+  stackItem     StackItem @relation(fields: [stackItemId], references: [id], onDelete: Cascade)
+  thresholdDays Int
+  eolDate       DateTime
+  message       String
+  channel       String   @default("in-app") // in-app | email | webhook (future)
+  status        String   @default("unread") // unread | read | dismissed
+  createdAt     DateTime @default(now())
+
+  @@unique([stackItemId, thresholdDays, eolDate])
+}
+
+// --- endoflife.date cache: TTL-bound, never treated as permanent app data --
+
+model EolCache {
+  key       String   @id // "products" | "product:<slug>" | "categories" | "tags"
+  payload   String // JSON-serialized response body
+  fetchedAt DateTime @default(now())
+  expiresAt DateTime
+}

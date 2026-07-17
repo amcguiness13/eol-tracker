@@ -1,0 +1,11 @@
+node_modules/
+dist/
+build/
+*.log
+*.tsbuildinfo
+.env
+.env.local
+
+# SQLite database + Prisma migration lock is kept, but the actual db file is local state
+packages/backend/prisma/*.db
+packages/backend/prisma/*.db-journal
