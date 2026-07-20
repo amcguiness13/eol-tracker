@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import type { StackItemWithStatus } from "@eol-tracker/shared";
 import { api } from "../api/client";
+import { EditStackItemModal } from "../components/EditStackItemModal";
 import { StatusBadge } from "../components/StatusBadge";
 import { formatDate, formatDaysRemaining } from "../lib/format";
 
@@ -16,6 +17,7 @@ export function DashboardPage() {
   const [statusFilter, setStatusFilter] = useState("");
   const [categoryFilter, setCategoryFilter] = useState("");
   const [environmentFilter, setEnvironmentFilter] = useState("");
+  const [editingItem, setEditingItem] = useState<StackItemWithStatus | null>(null);
 
   function load() {
     setLoading(true);
@@ -149,6 +151,7 @@ export function DashboardPage() {
                   <th>EOL date</th>
                   <th>Days remaining</th>
                   <th>Support end date</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
@@ -173,12 +176,28 @@ export function DashboardPage() {
                         ? `${formatDate(item.status.supportEndDate)} (${formatDaysRemaining(item.status.daysUntilSupportEnd)})`
                         : "—"}
                     </td>
+                    <td>
+                      <button type="button" className="button-secondary" onClick={() => setEditingItem(item)}>
+                        Edit
+                      </button>
+                    </td>
                   </tr>
                 ))}
               </tbody>
             </table>
           )}
         </>
+      )}
+
+      {editingItem && (
+        <EditStackItemModal
+          item={editingItem}
+          onClose={() => setEditingItem(null)}
+          onSaved={() => {
+            setEditingItem(null);
+            load();
+          }}
+        />
       )}
     </div>
   );
