@@ -313,6 +313,7 @@ label strong {
   padding: 0.95rem 1rem;
   text-align: left;
   transition: background-color 150ms ease;
+  color: var(--text);
 }
 
 .product-row:hover {
@@ -321,6 +322,7 @@ label strong {
 
 .product-row.selected {
   background: rgba(37, 99, 235, 0.1);
+  color: var(--text);
 }
 
 .product-slug {
