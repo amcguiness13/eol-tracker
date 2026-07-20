@@ -29,10 +29,6 @@ export function CycleSelector({ productSlug, onAdded }: CycleSelectorProps) {
       .catch((err) => setError(err.message));
   }, [productSlug]);
 
-  // Allow a user to type a custom cycle/version (useful when the desired
-  // We read all releases from endoflife.date and present them in the
-  // select control — no freeform entry required.
-
   async function handleAdd() {
     if (!cycle) return;
     setSubmitting(true);
@@ -74,13 +70,11 @@ export function CycleSelector({ productSlug, onAdded }: CycleSelectorProps) {
         <select value={cycle} onChange={(e) => setCycle(e.target.value)}>
           {detail.releases.map((r) => (
             <option key={r.name} value={r.name}>
-              {r.label} {r.isLts ? "(LTS)" : ""}
+              {r.label}
             </option>
           ))}
         </select>
       </label>
-
-      {/* All available releases are provided by the API and selectable above. */}
 
       <label>
         Environment
