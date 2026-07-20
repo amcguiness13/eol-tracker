@@ -157,7 +157,11 @@ export function DashboardPage() {
                     <td>
                       <StatusBadge status={item.status.status} />
                     </td>
-                    <td>{item.product}</td>
+                    <td>
+                      <a href={`https://endoflife.date/${item.product}`} target="_blank" rel="noopener noreferrer">
+                        {item.product}
+                      </a>
+                    </td>
                     <td>{item.label}</td>
                     <td>{item.category ?? "—"}</td>
                     <td>{item.environment}</td>
