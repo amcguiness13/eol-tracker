@@ -30,8 +30,8 @@ export function CycleSelector({ productSlug, onAdded }: CycleSelectorProps) {
   }, [productSlug]);
 
   // Allow a user to type a custom cycle/version (useful when the desired
-  // release isn't present in the select for whatever reason).
-  const [customCycle, setCustomCycle] = useState("");
+  // We read all releases from endoflife.date and present them in the
+  // select control — no freeform entry required.
 
   async function handleAdd() {
     if (!cycle) return;
@@ -80,23 +80,7 @@ export function CycleSelector({ productSlug, onAdded }: CycleSelectorProps) {
         </select>
       </label>
 
-      <label>
-        Or enter a custom version
-        <input
-          list={`releases-${productSlug}`}
-          placeholder="e.g. 17"
-          value={customCycle}
-          onChange={(e) => {
-            setCustomCycle(e.target.value);
-            setCycle(e.target.value);
-          }}
-        />
-        <datalist id={`releases-${productSlug}`}>
-          {detail.releases.map((r) => (
-            <option key={r.name} value={r.name} />
-          ))}
-        </datalist>
-      </label>
+      {/* All available releases are provided by the API and selectable above. */}
 
       <label>
         Environment
