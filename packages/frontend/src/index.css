@@ -1,6 +1,8 @@
 :root {
   color-scheme: light dark;
   font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  --text: #0f172a;
+  --bg: #ffffff;
   --border: #d0d5dd;
   --bg-subtle: #f7f8fa;
   --text-muted: #667085;
@@ -15,6 +17,8 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
+    --text: #f8fafc;
+    --bg: #0f172a;
     --border: #333a45;
     --bg-subtle: #1c2027;
     --text-muted: #9aa4b2;
@@ -31,6 +35,20 @@
 body {
   margin: 0;
   padding: 0;
+  color: var(--text);
+  background: var(--bg);
+}
+
+input,
+select,
+button,
+textarea {
+  color: var(--text);
+}
+
+option {
+  color: var(--text);
+  background: var(--bg);
 }
 
 .app-header {
