@@ -26,7 +26,11 @@ export function StackTable({ items, onRemove }: StackTableProps) {
       <tbody>
         {items.map((item) => (
           <tr key={item.id}>
-            <td>{item.product}</td>
+            <td>
+              <a href={`https://endoflife.date/${item.product}`} target="_blank" rel="noopener noreferrer">
+                {item.product}
+              </a>
+            </td>
             <td>{item.cycle}</td>
             <td>{item.environment}</td>
             <td>{item.owner ?? "—"}</td>

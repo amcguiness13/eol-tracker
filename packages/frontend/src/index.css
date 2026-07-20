@@ -172,6 +172,21 @@ tbody tr:hover {
   background: var(--bg-subtle);
 }
 
+a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: color 150ms ease;
+}
+
+a:hover {
+  color: var(--accent-strong);
+  text-decoration: underline;
+}
+
+table a {
+  font-weight: 500;
+}
+
 input,
 select,
 textarea {
