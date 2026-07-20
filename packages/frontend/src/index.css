@@ -2,12 +2,13 @@
   color-scheme: light dark;
   font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
   --text: #111827;
-  --bg: #f4f6fb;
+  --bg: #eff3fb;
   --surface: #ffffff;
   --surface-strong: #eef2f7;
+  --header-bg: rgba(255, 255, 255, 0.95);
   --border: #d2d7e1;
-  --bg-subtle: #eef2f7;
-  --text-muted: #6b7280;
+  --bg-subtle: #f3f5fb;
+  --text-muted: #57606a;
   --accent: #2563eb;
   --accent-strong: #1748b2;
   --green: #0f7e5e;
@@ -23,15 +24,19 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --text: #e2e8f0;
-    --bg: #0f172a;
+    --bg: #0b1220;
     --surface: #111827;
-    --surface-strong: #1f2937;
+    --surface-strong: #161f2f;
+    --header-bg: rgba(15, 23, 42, 0.95);
     --border: #273449;
     --bg-subtle: #111827;
     --text-muted: #94a3b8;
+    --accent: #5b8bff;
+    --accent-strong: #8fb7ff;
     --green-bg: #052e1f;
     --amber-bg: #3c2c0b;
     --red-bg: #3a1212;
+    --shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
   }
 }
 
@@ -44,11 +49,23 @@ body {
   padding: 0;
   min-height: 100vh;
   color: var(--text);
-  background: linear-gradient(180deg, #f7f9fe 0%, #edf1f9 100%);
+  background: var(--bg);
 }
 
 body.dark {
-  background: linear-gradient(180deg, #0c1726 0%, #111827 100%);
+  background: var(--bg);
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 1.25rem 2rem;
+  background: var(--header-bg);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.08);
 }
 
 input,
@@ -183,12 +200,56 @@ button {
   color: #ffffff;
   font-weight: 600;
   cursor: pointer;
-  box-shadow: 0 16px 30px rgba(37, 99, 235, 0.12);
+  box-shadow: 0 16px 30px rgba(37, 99, 235, 0.16);
 }
 
 button:hover:not(:disabled) {
   background: var(--accent-strong);
-  box-shadow: 0 18px 35px rgba(37, 99, 235, 0.18);
+  box-shadow: 0 18px 35px rgba(37, 99, 235, 0.22);
+}
+
+select {
+  appearance: none;
+  background: var(--surface);
+}
+
+select option {
+  background: var(--surface);
+}
+
+input,
+select,
+textarea {
+  color: var(--text);
+}
+
+option {
+  color: var(--text);
+  background: var(--surface);
+}
+
+.app-header h1,
+.app-header nav a,
+label,
+.error-text,
+.product-slug,
+.product-category,
+th,
+td {
+  color: var(--text);
+}
+
+.app-header nav a {
+  color: var(--text-muted);
+}
+
+.app-header nav a.active {
+  color: var(--accent);
+}
+
+.app-header nav a:hover {
+  background: var(--surface-strong);
+  color: var(--text);
 }
 
 button:disabled {
