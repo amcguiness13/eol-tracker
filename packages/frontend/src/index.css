@@ -539,3 +539,17 @@ label strong {
   background: var(--surface-strong);
   border-bottom: 1px solid var(--border);
 }
+
+.data-attribution a {
+  font-weight: 600;
+}
+
+@media (prefers-color-scheme: dark) {
+  .data-attribution {
+    color: var(--text);
+  }
+
+  .data-attribution a {
+    color: var(--accent-strong);
+  }
+}
