@@ -19,6 +19,13 @@ export default function App() {
         </nav>
       </header>
 
+      <p className="data-attribution">
+        Data provided by{" "}
+        <a href="https://endoflife.date" target="_blank" rel="noopener noreferrer">
+          endoflife.date
+        </a>
+      </p>
+
       <main className="app-main">
         <Routes>
           <Route path="/" element={<DashboardPage />} />
